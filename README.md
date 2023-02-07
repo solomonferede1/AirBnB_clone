@@ -66,6 +66,6 @@ Do you remember the Shell? It’s exactly the same but limited to a specific use
 ## Authors
 **Solomon Ferede** - [https://github.com/solomon1227]/ solomonf1227@gmail.com
 
-**Nicholas Maina** - []
+**Nicholas Ndure** - [https://github.com/Ndure]  /ndurenicholas@gmail.com
 
 06 February 2023
