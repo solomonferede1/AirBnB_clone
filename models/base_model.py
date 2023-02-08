@@ -7,7 +7,6 @@ defines all common attributes/methods for other classes:
 
 import unittest
 import uuid
-import cmd
 import datetime
 
 
@@ -20,16 +19,10 @@ class BaseModel:
                 if key == 'id':
                     self.id = value
                 if key == 'created_at':
-                    value, _, m_seconds = value.partition(".")
-                    value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S")
-                    m_seconds = int(m_seconds.rstrip("Z"), 10)
-                    value += timedelta(microseconds=m_seconds)
+                    value = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                     self.created_at = value
                 if key == 'updated_at':
-                    value, _, m_seconds = value.partition(".")
-                    value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S")
-                    m_seconds = int(m_seconds.rstrip("Z"), 10)
-                    value += timedelta(microseconds=m_seconds)                    
+                    value = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")                
                     self.updated_at = value
         else:
             self.id = str(uuid.uuid4())
