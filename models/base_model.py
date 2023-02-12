@@ -1,51 +1,63 @@
 #!/usr/bin/python3
 """
-The base_model module
-defines all common attributes/methods for other classes:
+==============================================
+Base class mother of all classes and chikens
+==============================================
 """
 
-
-import unittest
-import uuid
-import datetime
+from uuid import uuid4
+from datetime import datetime
+from datetime import timedelta
+import models
 
 
 class BaseModel:
-    """a class BaseModel that defines all common attributes/methods for other classes:""" 
+    """Mother of classes and chickens"""
+
     def __init__(self, *args, **kwargs):
-        """Inistantiation of instance attributes"""
+        """The constructor"""
         if kwargs:
             for key, value in kwargs.items():
-                if key == 'id':
-                    self.id = value
-                if key == 'created_at':
-                    value = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
-                    self.created_at = value
-                if key == 'updated_at':
-                    value = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")                
-                    self.updated_at = value
+
+                if key == "updated_at" or key == "created_at":
+                    # reversing iso format to datetime
+                    value, _, m_seconds = value.partition(".")
+                    value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S")
+                    m_seconds = int(m_seconds.rstrip("Z"), 10)
+                    value += timedelta(microseconds=m_seconds)
+                    # Assingning all the values
+                    setattr(self, key, value)
+                elif key == "__class__":
+                    pass
+                else:
+                    setattr(self, key, value)
+
         else:
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.datetime.now()
-            self.updated_at = datetime.datetime.now()
-            FileStorage.storage.new()
+            self.id = str(uuid4())
+            self.updated_at = datetime.now()
+            self.created_at = datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
-        """Prinnt string representation of an object"""
-        return ("[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__))
+        """print information"""
+
+        return "[{}] ({}) {}".format(self.__class__.__name__, self.id,
+                                     str(self.__dict__))
 
     def save(self):
-        """updates the public instance attribute updated_at with the current datetime"""
-        self.updated_at = datetime.datetime.now()
-        FileStorage.storage.save(self)
+        """update the attribute updated_at"""
+
+        self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
-        """ returns a dictionary containing all keys/values of
-         __dict__ of the instance:"""
+        """save in a dictionary"""
+
         my_dic = {}
         for key, value in self.__dict__.items():
-            if key == "updated_at" or key == "created_at":
-                value = value.isoformat()
-            my_dic[key] = value
-        my_dic["__class__"] = self.__class__.__name__
+            my_dic["__class__"] = self.__class__.__name__
+            if key == "created_at" or key == "updated_at":
+                my_dic[key] = value.isoformat()  # convert to string
+            else:
+                my_dic[key] = value
         return my_dic
