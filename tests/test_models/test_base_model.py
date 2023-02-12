@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """test for the class Base_model"""
 
+
 import os
 import unittest
 from models.base_model import BaseModel
@@ -36,6 +37,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(d['created_at'], dog.created_at.isoformat())
         self.assertEqual(d['updated_at'], dog.updated_at.isoformat())
         self.assertEqual(d['id'], dog.id)
+
 
 if __name__ == '__main__':
     unittest.main()

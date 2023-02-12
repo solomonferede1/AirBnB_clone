@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """User unittest module"""
 
+
 import unittest
 import os
 from models.user import User
@@ -49,6 +50,7 @@ class TestUser(unittest.TestCase):
     def test_has_attr(self):
         """ tests if the base model has the attr """
         self.assertTrue(hasattr(User, "save"))
+
 
 if __name__ == "__main__":
     unittest.main()

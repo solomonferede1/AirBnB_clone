@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """User unittest module for the class State"""
 
+
 import unittest
 import os
 from models.state import State
@@ -38,6 +39,7 @@ class TestState(unittest.TestCase):
     def test_has_attr(self):
         """ tests if the base model has the attr """
         self.assertTrue(hasattr(State, "save"))
+
 
 if __name__ == "__main__":
     unittest.main()

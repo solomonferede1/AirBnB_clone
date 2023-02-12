@@ -5,6 +5,7 @@ User unittest module for the class Review
 =========================================
 """
 
+
 import unittest
 import os
 from models.review import Review
@@ -47,6 +48,7 @@ class TestPlace(unittest.TestCase):
         """ tests if the base model has the attr """
 
         self.assertTrue(hasattr(Review, "save"))
+
 
 if __name__ == "__main__":
     unittest.main()

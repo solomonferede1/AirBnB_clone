@@ -83,7 +83,6 @@ class TestFileStorage(unittest.TestCase):
         key = "User." + test2
         all_storage = storage.all()
         self.assertEqual(type(all_storage), dict)
-    
 
         # Cell D tests new() and the dict
         my_model = BaseModel()
@@ -164,6 +163,7 @@ class TestFileStorage(unittest.TestCase):
     def test_has_attr(self):
         """ tests if the base model has the attr """
         self.assertTrue(hasattr(BaseModel, "save"))
+
 
 if __name__ == "__main__":
     unittest.main()
