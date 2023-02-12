@@ -168,5 +168,6 @@ class HBNBCommand(cmd.Cmd):
                 elif key[:-2] in my_methods:
                     my_methods[key[:-2]](data[0])
 
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
