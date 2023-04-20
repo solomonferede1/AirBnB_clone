@@ -38,6 +38,11 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(d['updated_at'], dog.updated_at.isoformat())
         self.assertEqual(d['id'], dog.id)
 
+    def test_save(self):
+        """test if the model method save"""
+        dog = BaseModel()
+        dog.save()
+
 
 if __name__ == '__main__':
     unittest.main()
